@@ -1,0 +1,22 @@
+  
+int sensor = A0; 
+
+void setup() {
+    
+    pinMode (sensor, INPUT);
+    
+}
+
+void loop() {
+    
+    int moisture = analogRead(sensor);
+
+    Particle.publish("Moisture", String(moisture), PRIVATE);
+    
+    if (0 <= moisture && moisture < 750) Particle.publish("Moisture", "Low", PRIVATE);
+    else if (750 <= moisture && moisture < 1500) Particle.publish("Moisture", "Medium", PRIVATE);
+    else Particle.publish("Moisture", "High", PRIVATE);
+    
+    delay(4320000);
+    
+}
